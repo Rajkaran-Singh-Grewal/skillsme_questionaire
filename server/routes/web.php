@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','App\Http\Controllers\HomeController@index')->name('home');
+Route::post('/signinUser','UserController@signinUser')->name('signinUser');
+Route::post('/createUser','UserController@createUser')->name('createUser');
+Route::post('/forgetPassword','UserController@forgetPassword')->name('forgetPassword');
+Route::post('/resetPassword','UserController@resetPassword')->name('resetPassword');
+Route::post('/updatePassword','UserController@updatePassword')->name('updatePassword');
+Route::post('/usersQuestionnaires','Questionnaires@usersQuestionnaires')->name('usersQuestionnaires');
+Route::post('/viewableQuestionnaires','Questionnaires@viewableQuestionnaires')->name('viewableQuestionnaires');
+Route::post('/addQuestionnaires','Questionnaires@addQuestionnaires')->name('addQuestionnaires');
+Route::post('/updateQuestionnaires','Questionnaires@updateQuestionnaires')->name('updateQuestionnaires');
+Route::post('/submitQuestionnaires','Questionnaires@submitQuestionnaires')->name('submitQuestionnaires');
