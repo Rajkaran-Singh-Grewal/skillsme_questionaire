@@ -6,6 +6,7 @@
     <title>Home</title>
 </head>
 <body>
-    
+    <div id="app"></div>
 </body>
+<script src="/js/app"></script>
 </html>
