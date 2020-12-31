@@ -1,0 +1,59 @@
+version: '3.7'
+services: 
+  server:
+    build:
+      args:
+        user: steve
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    container_name: skillsme_questionaire_server
+    environment:
+      XDEBUG_CONFIG: remote_host=host.docker.internal remote_port = 9000 remote_enable=1
+    ports:
+      - 81:80
+    restart: unless-stopped
+    volumes:
+      - ./server:/var/www
+    working_dir: /var/www
+    networks:
+      - questionaire
+  db:
+    image: mysql:5.7
+    container_name: skillsme_questionaire_database
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_PASSWORD: 123
+    ports:
+      - 3306:3306
+    volumes:
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - questionaire
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: skillsme_questionaire_phpmyadmin
+    restart: unless-stopped
+    ports: 
+      - 3307:80
+    volumes:
+      - ./docker-compose/mysql-phpmyadmin:/sessions
+    networks:
+      - questionaire
+  nginx:
+    image: nginx:alpine
+    container_name: skillsme_questionaire_nginx
+    restart: unless-stopped
+    ports:
+      - 8001:80
+    volumes:
+      - ./server:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d
+    networks:
+      - questionaire
+networks:
+  questionaire:
+    driver: bridge
