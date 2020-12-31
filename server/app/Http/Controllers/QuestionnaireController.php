@@ -7,6 +7,8 @@ use App\Models\Questionnaire;
 use App\Models\Viewable;
 use App\Models\Question;
 use App\Models\Option;
+use App\Models\Answer;
+use App\Models\Response;
 use Illuminate\Support\Facades\DB;
 class QuestionnaireController extends Controller
 {
@@ -163,5 +165,46 @@ class QuestionnaireController extends Controller
             'success' => true,
             'message' => 'Questionnaire update was successful'
         ],200);
+    }
+    /**
+     * Function to submit your response
+     */
+    public function submitQuestionnaire(Request $request){
+        $user_id = 0;
+        $oscpu = $request->oscpu;
+        $user_ip = $_SERVER['HTTP_CLIENT_IP'];
+        if(isset($request->user_id)){
+            $user_id = $request->user_id;
+            $answer = Answer::where('questionnaire_id','=',$request->questionnaire_id)->first();
+        }else{
+            $answer = Answer::where([
+                ['questionnaire_id','=',$request->questionnaire_id],
+                ['oscpu','=',$oscpu],
+                ['user_ip','=',$user_ip]
+            ])->first();
+        }
+        if($answer == null){
+            $answer = Answer::create([
+                'questionnaire_id' => $request->questionnaire_id,
+                'user_id'          => $user_id,
+                'oscpu'            => $oscpu,
+                'user_ip'          => $user_ip
+            ]);
+            foreach($request->responses as $response){
+                Response::create([
+                    'answer_id'   => $answer->id,
+                    'question_id' => $response->question_id,
+                    'answer'      => $response->answer
+                ]);
+            }
+            return response([
+                'success' => true,
+                'message' => 'answer submitted'
+            ],200);
+        }
+        return response([
+            'success' => false,
+            'message' => 'answer already submitted'
+        ],401);
     }
 }
