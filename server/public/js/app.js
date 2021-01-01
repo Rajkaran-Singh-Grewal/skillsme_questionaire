@@ -19323,6 +19323,50 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/components/AppComponent.vue":
+/*!***********************************************!*\
+  !*** ./resources/components/AppComponent.vue ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/vue-loader/lib/index.js):\nTypeError: Cannot read property 'parseComponent' of undefined\n    at parse (C:\\dev\\portfolio\\skillsme_questionaire\\server\\node_modules\\@vue\\component-compiler-utils\\dist\\parse.js:15:23)\n    at Object.module.exports (C:\\dev\\portfolio\\skillsme_questionaire\\server\\node_modules\\vue-loader\\lib\\index.js:67:22)");
+
+/***/ }),
+
+/***/ "./resources/components/DashboardComponent.vue":
+/*!*****************************************************!*\
+  !*** ./resources/components/DashboardComponent.vue ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/vue-loader/lib/index.js):\nTypeError: Cannot read property 'parseComponent' of undefined\n    at parse (C:\\dev\\portfolio\\skillsme_questionaire\\server\\node_modules\\@vue\\component-compiler-utils\\dist\\parse.js:15:23)\n    at Object.module.exports (C:\\dev\\portfolio\\skillsme_questionaire\\server\\node_modules\\vue-loader\\lib\\index.js:67:22)");
+
+/***/ }),
+
+/***/ "./resources/components/QuestionnaireComponent.vue":
+/*!*********************************************************!*\
+  !*** ./resources/components/QuestionnaireComponent.vue ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/vue-loader/lib/index.js):\nTypeError: Cannot read property 'parseComponent' of undefined\n    at parse (C:\\dev\\portfolio\\skillsme_questionaire\\server\\node_modules\\@vue\\component-compiler-utils\\dist\\parse.js:15:23)\n    at Object.module.exports (C:\\dev\\portfolio\\skillsme_questionaire\\server\\node_modules\\vue-loader\\lib\\index.js:67:22)");
+
+/***/ }),
+
+/***/ "./resources/components/ResponseComponent.vue":
+/*!****************************************************!*\
+  !*** ./resources/components/ResponseComponent.vue ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/vue-loader/lib/index.js):\nTypeError: Cannot read property 'parseComponent' of undefined\n    at parse (C:\\dev\\portfolio\\skillsme_questionaire\\server\\node_modules\\@vue\\component-compiler-utils\\dist\\parse.js:15:23)\n    at Object.module.exports (C:\\dev\\portfolio\\skillsme_questionaire\\server\\node_modules\\vue-loader\\lib\\index.js:67:22)");
+
+/***/ }),
+
 /***/ "./resources/css/app.css":
 /*!*******************************!*\
   !*** ./resources/css/app.css ***!
@@ -19342,6 +19386,25 @@ module.exports = function(module) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
+var routes = [{
+  path: '/dashboard',
+  component: __webpack_require__(/*! ../components/DashboardComponent */ "./resources/components/DashboardComponent.vue")
+}, {
+  path: '/questionnaire',
+  component: __webpack_require__(/*! ../components/QuestionnaireComponent */ "./resources/components/QuestionnaireComponent.vue")
+}, {
+  path: '/response',
+  component: __webpack_require__(/*! ../components/ResponseComponent */ "./resources/components/ResponseComponent.vue")
+}];
+var router = VueRouter.createRouter({
+  history: VueRouter.createWebHashHistory(),
+  routes: routes
+});
+var app = Vue.createApp({});
+app.component('AppComponent', __webpack_require__(/*! ../components/AppComponent */ "./resources/components/AppComponent.vue"));
+app.use(router);
+app.mount('#app');
 
 /***/ }),
 
